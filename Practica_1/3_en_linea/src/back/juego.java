@@ -12,10 +12,21 @@
 // El paquete back contiene las clases relacionadas con la lógica del juego
 package back;
 
+/**
+ * Clase que representa el juego 3 en línea.
+ */
 public class juego {
     // Atributos del juego
     private String[][] tablero;
-    private Jugadores[] jugadores; // Arreglo de jugadores (estructura de datos)
+    /**
+     * ARREGLO DE OBJETOS - Almacenamiento de jugadores
+     * Este arreglo almacena objetos de tipo Jugadores, permitiendo gestionar
+     * la información de ambos jugadores en una estructura de datos única.
+     * Cada elemento del arreglo (jugadores[0] y jugadores[1]) contiene un objeto
+     * con los atributos y métodos de la clase Jugadores.
+     */
+    private Jugadores[] jugadores;
+    // Variables para el control del juego
     private int turnoActual;
     private int partidasJugadas;
     private int maxPartidas;
@@ -27,8 +38,9 @@ public class juego {
      * @param numPartidas Número de partidas a jugar (entre 1 y 5).
      */
     public juego(Jugadores jugador1, Jugadores jugador2, int numPartidas) {
-        jugadores = new Jugadores[2]; // Arreglo para almacenar los jugadores
-        // Inicializar los jugadores en el arreglo
+        // Crear el arreglo de objetos con capacidad para 2 jugadores
+        jugadores = new Jugadores[2];
+        // Asignar los objetos Jugadores a las posiciones del arreglo
         jugadores[0] = jugador1;
         jugadores[1] = jugador2;
         // Inicializar el tablero y otras variables
@@ -139,6 +151,14 @@ public class juego {
      */
     public void registrarVictoria() {
         jugadores[turnoActual].agregarPunto();
+        partidasJugadas++;
+    }
+    
+    /**
+     * Registra un empate sin dar puntos a ningún jugador.
+     * Solo incrementa el contador de partidas jugadas.
+     */
+    public void registrarEmpate() {
         partidasJugadas++;
     }
     

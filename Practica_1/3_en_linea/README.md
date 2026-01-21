@@ -17,6 +17,7 @@ Juego de 3 en raya implementado en Java con interfaz gráfica (Swing) que incluy
 - ✅ Sistema de turnos alternados
 - ✅ Puntos acumulados por jugador
 - ✅ **Estructura de datos:** Arreglo de objetos Jugadores y matriz para el tablero
+- ✅ **Ranking de los 5 mejores jugadores** (tabla de mejores puntajes)
 - ✅ Validación de movimientos y detección de ganador o empate
 - ✅ Determinación del ganador final según puntaje
 
@@ -30,6 +31,7 @@ Juego de 3 en raya implementado en Java con interfaz gráfica (Swing) que incluy
 │   └── back/
 │       ├── Jugadores.java      # Clase para gestionar jugadores
 │       └── juego.java          # Lógica del juego
+│       └── Ranking.java        # Clase para gestionar el ranking
 ├── dist/                        # Archivos distribuidos (JAR)s
 ├── bin/                         # Archivos compilados (.class)
 ├── doc/                         # Documentación
@@ -55,14 +57,24 @@ Juego de 3 en raya implementado en Java con interfaz gráfica (Swing) que incluy
 - **Control de partidas configurable** (1 a 5 partidas)
 - Determinación del ganador final
 
+### Clase Ranking
+- **Arreglo de objetos para Top 5:** Almacena los 5 mejores jugadores
+- Máximo de 5 espacios en el arreglo
+- Sistema de ordenamiento automático por puntos
+- Actualización de puntajes acumulados
+- Sustitución del jugador con menor puntaje si llega uno mejor
+- Métodos para visualizar y gestionar el ranking
+
 ### Interfaz Gráfica (Ventana)
 - Matriz 3x3 de botones interactivos
 - Panel de información de jugadores
 - Indicador de turno actual
 - Contador de partidas
 - Visualización de puntos en tiempo real
-- Botón para iniciar nueva partida
+- **Botón "Nueva Partida"** para reiniciar
+- **Botón "Ver Top 5"** para mostrar el ranking de mejores jugadores
 - Diálogo con resultado final
+- Sistema automático de guardado en ranking
 
 ## 🚀 Cómo Ejecutar
 

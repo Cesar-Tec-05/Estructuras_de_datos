@@ -16,6 +16,7 @@ package app;
 // Importaciones necesarias
 import back.Jugadores;
 import back.juego;
+import back.Ranking;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -31,6 +32,9 @@ public class Ventana extends JFrame {
     private JButton[][] botones;
     private JLabel lblJugador1, lblJugador2, lblTurno, lblPartida, lblEstado;
     private JPanel panelTablero, panelInfo, panelSuperior;
+    
+    // Ranking global para almacenar los mejores jugadores (arreglo de objetos)
+    private static Ranking rankingGlobal = new Ranking();
     
     /**
      * Constructor de la clase Ventana.
@@ -153,6 +157,9 @@ public class Ventana extends JFrame {
         lblEstado = new JLabel("¡Que comience el juego!", JLabel.CENTER);
         lblEstado.setFont(new Font("Arial", Font.BOLD, 16));
         lblEstado.setForeground(new Color(46, 204, 113));
+        // Panel para los botones (Nueva Partida y Ver Ranking)
+        JPanel panelBotones = new JPanel(new GridLayout(1, 2, 10, 0));
+        panelBotones.setBackground(new Color(240, 240, 240));
         // Botón para reiniciar la partida
         JButton btnReiniciar = new JButton("Nueva Partida");
         btnReiniciar.setFont(new Font("Arial", Font.BOLD, 14));
@@ -160,9 +167,19 @@ public class Ventana extends JFrame {
         btnReiniciar.setForeground(Color.WHITE);
         btnReiniciar.setFocusPainted(false);
         btnReiniciar.addActionListener(e -> nuevaPartida());
+        // Botón para ver el ranking de los 5 mejores jugadores
+        JButton btnRanking = new JButton("🏆 Ver Top 5");
+        btnRanking.setFont(new Font("Arial", Font.BOLD, 14));
+        btnRanking.setBackground(new Color(155, 89, 182));
+        btnRanking.setForeground(Color.WHITE);
+        btnRanking.setFocusPainted(false);
+        btnRanking.addActionListener(e -> mostrarRanking());
+        // Agregar botones al panel de botones
+        panelBotones.add(btnReiniciar);
+        panelBotones.add(btnRanking);
         // Agregar componentes al panel inferior
         panelInfo.add(lblEstado, BorderLayout.CENTER);
-        panelInfo.add(btnReiniciar, BorderLayout.SOUTH);
+        panelInfo.add(panelBotones, BorderLayout.SOUTH);
         // Agregar paneles a la ventana
         add(panelSuperior, BorderLayout.NORTH);
         add(panelTablero, BorderLayout.CENTER);
@@ -270,10 +287,8 @@ public class Ventana extends JFrame {
             } else if (juegoActual.verificarEmpate()) { // Verificar si hay un empate
                 lblEstado.setText("¡Empate en esta partida!");
                 lblEstado.setForeground(new Color(243, 156, 18));
-                juegoActual.registrarVictoria(); // Incrementa contador sin dar puntos
-                juegoActual.getJugadorActual().agregarPunto(); // Quita el punto que se agregó
-                juegoActual.getJugadorActual().agregarPunto(); // Este es un hack, mejor refactorizar
-                // Actualización: mejor incrementar directamente partidasJugadas
+                // Registrar empate sin dar puntos a ningún jugador
+                juegoActual.registrarEmpate();
                 // Actualizar la puntuación y bloquear el tablero
                 actualizarPuntuacion();
                 bloquearTablero();
@@ -373,20 +388,45 @@ public class Ventana extends JFrame {
     
     /**
      * Método para mostrar el resultado final del juego después de todas las partidas.
+     * Guarda los jugadores en el ranking global (arreglo de objetos).
      */
     private void mostrarResultadoFinal() {
+        // Guardar ambos jugadores en el ranking (arreglo de objetos)
+        Jugadores[] jugadores = juegoActual.getJugadores();
+        rankingGlobal.agregarJugador(jugadores[0]);
+        rankingGlobal.agregarJugador(jugadores[1]);
         // Mostrar el resultado final en un cuadro de diálogo
         String mensaje = "¡Juego Terminado!\n\n" + juegoActual.obtenerGanadorFinal() + 
                         "\n\nPuntuación Final:\n" +
-                        juegoActual.getJugadores()[0].getNombre() + ": " + 
-                        juegoActual.getJugadores()[0].getPuntos() + " puntos\n" +
-                        juegoActual.getJugadores()[1].getNombre() + ": " + 
-                        juegoActual.getJugadores()[1].getPuntos() + " puntos";
+                        jugadores[0].getNombre() + ": " + 
+                        jugadores[0].getPuntos() + " puntos\n" +
+                        jugadores[1].getNombre() + ": " + 
+                        jugadores[1].getPuntos() + " puntos\n\n" +
+                        "Los jugadores han sido agregados al ranking.";
         JOptionPane.showMessageDialog(this, mensaje, 
             "Resultado Final", 
             JOptionPane.INFORMATION_MESSAGE);
         lblEstado.setText(juegoActual.obtenerGanadorFinal());
         lblEstado.setForeground(new Color(155, 89, 182));
+    }
+    
+    /**
+     * Método para mostrar el ranking de los 5 mejores jugadores.
+     * Accede al arreglo de objetos del ranking y muestra la información.
+     */
+    private void mostrarRanking() {
+        String rankingTexto = rankingGlobal.obtenerRankingTexto();
+        // Crear un área de texto para mostrar el ranking con fuente monoespaciada
+        JTextArea textArea = new JTextArea(rankingTexto);
+        textArea.setEditable(false);
+        textArea.setFont(new Font("Monospaced", Font.BOLD, 14));
+        textArea.setBackground(new Color(240, 240, 240));
+        textArea.setForeground(new Color(52, 73, 94));
+        // Mostrar el ranking en un cuadro de diálogo
+        JOptionPane.showMessageDialog(this, 
+            textArea, 
+            "Top 5 Mejores Jugadores", 
+            JOptionPane.INFORMATION_MESSAGE);
     }
     
     /**
