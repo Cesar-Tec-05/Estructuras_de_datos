@@ -3,7 +3,7 @@
 # ================================================================
 # Script de lanzamiento para producción - Editor de Texto con Pilas
 # @author Cesar de Jesus Becerra Vera
-# @since 28s de Enero de 2026
+# @since 28 de Enero de 2026
 # @version 1.0
 # ARCHIVO: launch.sh
 # CENTRO UNIVERSITARIO DE LOS ALTOS / UNIVERSIDAD DE GUADALAJARA

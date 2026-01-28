@@ -75,7 +75,7 @@ java -cp bin app.Pilas
 ## 🏗️ Estructura del Proyecto
 
 ```
-3_en_linea/
+Practica_3/pilas/
 ├── src/
 │   ── app/
 │       └── Pilas.java        # Programa principal del editor de texto
