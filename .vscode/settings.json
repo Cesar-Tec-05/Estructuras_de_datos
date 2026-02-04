@@ -1,6 +1,6 @@
 {
     "java.project.sourcePaths": [
-        "Practica_2/pilas/src"
+        "Practica_2/cola_circular/src"
     ],
     "java.project.referencedLibraries": [],
     "java.format.settings.url": ".vscode/java-formatter.xml"
