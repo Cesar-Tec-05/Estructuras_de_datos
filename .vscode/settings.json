@@ -1,6 +1,6 @@
 {
     "java.project.sourcePaths": [
-        "practica_5/historial_de_navegacion/src"
+        "Practica_6/gestion_estudiantes/src"
     ],
     "java.project.referencedLibraries": [],
     "java.format.settings.url": ".vscode/java-formatter.xml"
