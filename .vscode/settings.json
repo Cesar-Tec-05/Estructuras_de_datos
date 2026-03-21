@@ -1,6 +1,6 @@
 {
     "java.project.sourcePaths": [
-        "Practica_9/ordenamiento_fechas_burbuja/src"
+        "Practica_10/ordenamiento_nombres_shell/src"
     ],
     "java.project.referencedLibraries": [],
     "java.format.settings.url": ".vscode/java-formatter.xml"
