@@ -1,6 +1,6 @@
 {
     "java.project.sourcePaths": [
-        "Practica_11/ordenamiento_quicksort/src"
+        "Practica_12/busqueda_binaria_datos_alfanumericos/src"
     ],
     "java.project.referencedLibraries": [],
     "java.format.settings.url": ".vscode/java-formatter.xml"
