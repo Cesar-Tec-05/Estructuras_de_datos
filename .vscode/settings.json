@@ -1,6 +1,6 @@
 {
     "java.project.sourcePaths": [
-        "Practica_12/busqueda_binaria_datos_alfanumericos/src"
+        "Practica_13/arboles_binarios/src"
     ],
     "java.project.referencedLibraries": [],
     "java.format.settings.url": ".vscode/java-formatter.xml"
