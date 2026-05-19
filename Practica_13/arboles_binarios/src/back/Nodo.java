@@ -24,7 +24,7 @@ public class Nodo {
     /**
      * Referencia al hijo izquierdo.
      */
-    private Nodo izquierdo;
+    private Nodo izquierdo, raiz;
 
     /**
      * Referencia al hijo derecho.
@@ -36,6 +36,7 @@ public class Nodo {
      * @param dato valor entero del nodo
      */
     public Nodo(int dato) {
+        this.raiz = null;
         this.dato = dato;
         this.izquierdo = null;
         this.derecho = null;
@@ -87,5 +88,13 @@ public class Nodo {
      */
     public void setDerecho(Nodo derecho) {
         this.derecho = derecho;
+    }
+
+    public void setRaiz(Nodo raiz) {
+        this.raiz = raiz;
+    }
+
+    public Nodo getRaiz() {
+        return raiz;
     }
 }

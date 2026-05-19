@@ -88,6 +88,50 @@ public class ArbolBinario {
         return true;
     }
 
+    @SuppressWarnings("null")
+    public static Nodo buscar (Nodo raiz, int valor) {
+        if (raiz != null) {
+            if (raiz.getDato() == valor) {
+                System.out.println("Valor encontrado");
+                return raiz;
+            }
+            return raiz;
+        } else if (valor < raiz.getDato()) {
+            return buscar(raiz.getIzquierdo(), valor);
+        } else if (valor > raiz.getDato()) {
+            return buscar (raiz.getDerecho(), valor);
+        }
+        return null; 
+    }
+
+    public static void eliminar(Nodo raiz, int valor) {
+        Nodo aux = buscar(raiz, valor);
+        if (aux == null) {
+            System.out.println("Valor no encontrado!");
+        } else {
+            if (aux.getRaiz() != null) {
+                if (aux.getRaiz().getDato() < aux.getDato()) {
+                    aux.getRaiz().setDerecho(null);
+                } else {
+                    aux.getRaiz().setIzquierdo(null);
+                }
+            } else if ((aux.getDerecho() == null && aux.getIzquierdo() != null) || (aux.getDerecho() != null && aux.getIzquierdo() == null)) {
+                if (aux.getRaiz() == null) {
+                    if (aux.getDerecho() == null) {
+                        aux = aux.getIzquierdo();
+                        aux.getIzquierdo().setRaiz(null);
+                        aux = null;
+                    } else {
+                        aux = aux.getDerecho();
+                        aux.getDerecho().setRaiz(null);
+                        aux = null;
+                    }
+                    return;
+                }
+            }
+        }
+    }
+
     /**
      * Devuelve el recorrido preorden (raiz, izquierdo, derecho).
      * @return cadena con los valores del recorrido
